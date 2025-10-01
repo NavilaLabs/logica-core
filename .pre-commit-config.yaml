@@ -17,7 +17,8 @@ repos:
         name: cargo fmt
         entry: cargo fmt --all -- --check
         language: system
-        types: [rust]
+        pass_filenames: false
+        always_run: true
 
   - repo: local
     hooks:
@@ -25,7 +26,8 @@ repos:
         name: cargo clippy
         entry: cargo clippy --all-targets --all-features -- -D warnings
         language: system
-        types: [rust]
+        pass_filenames: false
+        always_run: true
 
   - repo: local
     hooks:
@@ -33,7 +35,8 @@ repos:
         name: cargo test
         entry: cargo test --all
         language: system
-        types: [rust]
+        pass_filenames: false
+        always_run: true
         stages: [push]
 
   - repo: local
@@ -43,4 +46,5 @@ repos:
         entry: cargo audit
         language: system
         pass_filenames: false
+        always_run: true
         stages: [push]
