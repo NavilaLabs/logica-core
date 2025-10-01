@@ -36,14 +36,14 @@ path = "bin/generate_migration.rs"
 
 [workspace.lints.clippy]
 # Enforce correctness and best practices
-all = { level = "deny" }
-correctness = { level = "deny" }
-complexity = { level = "deny" }
-perf = { level = "deny" }
-style = { level = "deny" }
+all = { level = "deny", priority = -1 }
+correctness = { level = "deny", priority = -1 }
+complexity = { level = "deny", priority = -1 }
+perf = { level = "deny", priority = -1 }
+style = { level = "deny", priority = -1 }
 # Strict: pedantic + nursery for consistency and future-proofing
-pedantic = { level = "warn"}
-nursery = { level = "warn" }
+pedantic = { level = "warn", priority = -1 }
+nursery = { level = "warn", priority = -1 }
 # Safety restrictionscore/src/entities
 unwrap_used = "deny"
 expect_used = "deny"
