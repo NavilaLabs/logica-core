@@ -31,4 +31,4 @@ RUN rustup toolchain install stable \
  && rustup target add wasm32-unknown-unknown
 
 RUN cargo install cargo-tarpaulin
-
+RUN cargo install --locked --git https://github.com/j178/prek
