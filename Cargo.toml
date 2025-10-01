@@ -1,20 +1,49 @@
 [package]
-name = "rust-lib"
+name = "logica_core"
 version = "0.1.0"
 edition = "2024"
 
 [dependencies]
+chrono = { version = "0.4.42", default-features = false }
+clap = { version = "4.5.48", features = ["derive"], optional = true }
+eventually = { git = "https://github.com/get-eventually/eventually-rs", rev = "cd5a965", version = "0.5.0", default-features = false, features = ["serde-json"], optional = true }
+refinery = { version = "0.8.16", features = ["tokio-postgres"], optional = true }
+rust_decimal = { version = "1.38.0", default-features = false, features = ["serde"] }
+serde = { version = "1.0", default-features = false, features = ["derive"] }
+serde_json = { version = "1.0", default-features = false, features = ["alloc"]}
+thiserror = { version = "2.0", default-features = false }
+uuid = { version = "1.18.1", default-features = false, features = ["v4"] }
+
+[features]
+default = ["std", "adapter-es-eventually", "adapter-mig-refinery"]
+std = [
+    "chrono/std",
+    "chrono/now",
+    "rust_decimal/std",
+    "serde/std",
+    "serde_json/std",
+    "thiserror/std",
+    "uuid/std",
+]
+adapter-es-eventually = ["dep:eventually"]
+adapter-mig-refinery = ["dep:refinery"]
+
+dev-bin = ["std", "dep:clap"]
+
+[[bin]]
+name = "generate_migration"
+path = "bin/generate_migration.rs"
 
 [workspace.lints.clippy]
 # Enforce correctness and best practices
-all = { level = "deny", priority = -1 }
-correctness = { level = "deny", priority = -1 }
-complexity = { level = "deny", priority = -1 }
-perf = { level = "deny", priority = -1 }
-style = { level = "deny", priority = -1 }
+all = { level = "deny" }
+correctness = { level = "deny" }
+complexity = { level = "deny" }
+perf = { level = "deny" }
+style = { level = "deny" }
 # Strict: pedantic + nursery for consistency and future-proofing
-pedantic = { level = "warn", priority = -1 }
-nursery = { level = "warn", priority = -1 }
+pedantic = { level = "warn"}
+nursery = { level = "warn" }
 # Safety restrictionscore/src/entities
 unwrap_used = "deny"
 expect_used = "deny"
